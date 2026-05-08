@@ -201,7 +201,7 @@ public class ApplicationTemp {
 		ApplicationHome home = new ApplicationHome(sourceClass);
 		MessageDigest digest;
 		try {
-			digest = MessageDigest.getInstance("SHA-1");
+			digest = MessageDigest.getInstance("SHA-256");
 			update(digest, home.getSource());
 			update(digest, home.getDir());
 			update(digest, System.getProperty("user.dir"));
