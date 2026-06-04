@@ -151,7 +151,7 @@ class Connection {
 		Matcher matcher = WEBSOCKET_KEY_PATTERN.matcher(this.header);
 		Assert.state(matcher.find(), "No Sec-WebSocket-Key");
 		String response = matcher.group(1).trim() + WEBSOCKET_GUID;
-		MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
+		MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
 		messageDigest.update(response.getBytes(), 0, response.length());
 		return Base64.getEncoder().encodeToString(messageDigest.digest());
 	}

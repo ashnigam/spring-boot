@@ -43,6 +43,9 @@ import org.springframework.security.config.annotation.web.configuration.OAuth2Au
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.server.authorization.OAuth2Authorization;
 
+import com.example.pqc.config.CryptoConfig;
+import org.bouncycastle.pqc.jcajce.provider.BouncyCastlePQCProvider;
+
 /**
  * {@link EnableAutoConfiguration Auto-configuration} for JWT support for endpoints of the
  * OAuth2 authorization server that require it (e.g. User Info, Client Registration).
@@ -77,9 +80,8 @@ public final class OAuth2AuthorizationServerJwtAutoConfiguration {
 	private static KeyPair generateRsaKey() {
 		KeyPair keyPair;
 		try {
-			KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-			keyPairGenerator.initialize(2048);
-			keyPair = keyPairGenerator.generateKeyPair();
+			KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("KYBER", "BC");
+			// Note: KYBER does not require initialize() call
 		}
 		catch (Exception ex) {
 			throw new IllegalStateException(ex);
